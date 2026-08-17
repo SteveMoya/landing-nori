@@ -1,0 +1,30 @@
+{
+  "name": "landing-nori",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "pnpm@11.16.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@alpinejs/collapse": "^3.16.1",
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/nunito": "^5.3.0",
+    "@fontsource/baloo-2": "^5.3.0",
+    "alpinejs": "^3.16.1",
+    "astro": "^7.2.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3"
+  }
+}

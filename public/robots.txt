@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nori.stevemoya.me/sitemap-index.xml
