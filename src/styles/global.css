@@ -1,0 +1,125 @@
+@import "tailwindcss";
+@import "@fontsource/baloo-2";
+@import "@fontsource-variable/nunito";
+
+/* ============================================================
+   NORI DESIGN SYSTEM — Tokens
+   Bento Box: simplicidad zen, pasteles, esquinas generosas.
+   ============================================================ */
+@theme {
+  /* Tipografías (auto-hospedadas, swap) */
+  --font-display: "Baloo 2", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Colores */
+  --color-ink: #2d2a32; /* texto principal */
+  --color-cream: #faf9f7; /* fondo cálido */
+  --color-lavanda: #b8b5ff; /* pastel 1 */
+  --color-lavanda-deep: #8f8bf0; /* acento texto */
+  --color-mint: #a8e6cf; /* pastel 2 */
+  --color-peach: #ffd3b6; /* pastel 3 */
+  --color-butter: #fff3b0; /* pastel 4 */
+  --color-cielo: #bde0fe; /* pastel 5 */
+
+  /* Sombras suaves */
+  --shadow-soft: 0 8px 30px rgb(45 42 50 / 0.08);
+  --shadow-pastel: 0 16px 40px rgb(45 42 50 / 0.12);
+  --shadow-ink: 0 6px 0 rgb(45 42 50 / 0.9);
+
+  /* Animaciones */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 8s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream font-body text-ink antialiased;
+  }
+
+  ::selection {
+    background: var(--color-lavanda);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-lavanda-deep);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* ============================================================
+   Utilidades de marca
+   ============================================================ */
+@layer components {
+  .container-nori {
+    @apply mx-auto w-full max-w-6xl px-6 lg:px-8;
+  }
+
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+
+  /* Header scrolled */
+  [data-header].is-scrolled {
+    background: rgb(250 249 247 / 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgb(45 42 50 / 0.08);
+  }
+}
+
+/* ============================================================
+   Reveal on scroll (solo scripting + motion OK)
+   ============================================================ */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

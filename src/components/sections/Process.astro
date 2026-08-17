@@ -1,0 +1,38 @@
+---
+import { process } from '../../data/process';
+import Section from '../ui/Section.astro';
+
+const toneBgs: Record<string, string> = {
+  lavanda: 'bg-lavanda',
+  mint: 'bg-mint',
+  peach: 'bg-peach',
+  butter: 'bg-butter',
+  cielo: 'bg-cielo',
+};
+---
+
+<Section id="proceso" ariaLabelledBy="process-title">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 font-display text-sm font-bold uppercase tracking-widest text-lavanda-deep">Proceso</p>
+    <h2
+      id="process-title"
+      class="font-display text-4xl font-bold tracking-tight sm:text-5xl"
+    >
+      Un camino claro, <span class="text-lavanda-deep">sin sorpresas</span>
+    </h2>
+  </div>
+
+  <ol class="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+    {
+      process.map((step, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`} class="relative rounded-3xl border border-ink/5 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-pastel">
+          <span class:list={['grid h-12 w-12 place-items-center rounded-2xl font-display text-lg font-bold text-ink', toneBgs[step.tone]]}>
+            {step.number}
+          </span>
+          <h3 class="mt-4 font-display text-lg font-bold tracking-tight">{step.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink/60">{step.description}</p>
+        </li>
+      ))
+    }
+  </ol>
+</Section>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a
+  href="/"
+  aria-label="Nori — inicio"
+  class:list={['group inline-flex items-center gap-2', className]}
+>
+  <!-- Marca: onigiri abstracto (triángulo redondeado) -->
+  <span class="grid h-9 w-9 place-items-center rounded-2xl bg-lavanda text-ink shadow-soft transition-transform duration-200 group-hover:-rotate-6" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M12 3l7 12H5z" fill="currentColor" opacity="0.9" />
+      <circle cx="12" cy="11" r="2.4" fill="#FAF9F7" />
+    </svg>
+  </span>
+  <span class="font-display text-2xl font-bold tracking-tight text-ink transition-colors duration-200 group-hover:text-lavanda-deep">
+    nori<span class="text-lavanda-deep">.</span>
+  </span>
+</a>

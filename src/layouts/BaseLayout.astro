@@ -1,0 +1,110 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+  ogImage?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  title = site.name,
+  description = site.description,
+  noindex = false,
+  ogImage = `${site.url}/og.png`,
+  showHeader = true,
+  showFooter = true,
+} = Astro.props;
+
+const siteBase = Astro.site ?? site.url;
+const canonical = new URL(Astro.url.pathname, siteBase).toString();
+const pageTitle =
+  title === site.name ? `${site.name} — ${site.tagline}` : `${title} — ${site.name}`;
+
+const structured = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      name: site.name,
+      url: site.url,
+      email: site.email,
+      sameAs: site.socials.map((s) => s.url),
+    },
+    {
+      '@type': 'WebSite',
+      name: site.name,
+      url: site.url,
+      description: site.description,
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="es" class="bg-cream">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#faf9f7" />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Datos estructurados -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(structured)} />
+  </head>
+  <body class="min-h-screen bg-cream font-body text-ink">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2.5 focus:font-display focus:text-sm focus:font-semibold focus:text-cream"
+    >
+      Saltar al contenido
+    </a>
+
+    {showHeader && <Header />}
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    {showFooter && <Footer />}
+
+    <!-- Alpine.js: menú móvil, FAQ accordion (incluye plugin collapse) -->
+    <script>
+      import Alpine from 'alpinejs';
+      import collapse from '@alpinejs/collapse';
+
+      Alpine.plugin(collapse);
+      (globalThis as any).Alpine = Alpine;
+      Alpine.start();
+    </script>
+
+    <script>
+      import '../scripts/reveal';
+    </script>
+  </body>
+</html>

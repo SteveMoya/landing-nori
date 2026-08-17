@@ -1,0 +1,95 @@
+---
+import { site } from '../../data/site';
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="relative overflow-hidden bg-cream pt-28 md:pt-36">
+  <!-- blob decorativo -->
+  <div aria-hidden="true" class="pointer-events-none absolute -right-32 -top-24 h-96 w-96 rounded-full bg-lavanda/40 blur-3xl"></div>
+  <div aria-hidden="true" class="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 rounded-full bg-mint/40 blur-3xl"></div>
+
+  <div class="container-nori relative pb-16">
+    <!-- Bento grid hero: asimétrico, con links a productos -->
+    <div class="grid auto-rows-[minmax(110px,auto)] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Card principal (2x2) -->
+      <Card tone="lavanda" padded={false} class="sm:col-span-2 lg:row-span-2 flex flex-col justify-between p-8 lg:p-10">
+        <div>
+          <Badge tone="ink" class="mb-5">{site.hero.badge}</Badge>
+          <h1 class="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+            {site.hero.title.start} <span class="text-lavanda-deep">{site.hero.title.accent}</span>
+          </h1>
+          <p class="mt-5 max-w-md text-lg leading-relaxed text-ink/70">{site.hero.subtitle}</p>
+        </div>
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+          <Button href={`mailto:${site.email}?subject=Proyecto%20nuevo`} size="lg">
+            {site.hero.primaryCta}
+            <Icon name="arrow-right" size={18} />
+          </Button>
+          <Button href="#proyectos" variant="secondary" size="lg">
+            {site.hero.secondaryCta}
+          </Button>
+        </div>
+      </Card>
+
+      <!-- Mini card: estadística -->
+      <Card tone="white" class="flex flex-col justify-between">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-mint/60">
+          <Icon name="layers" size={20} />
+        </span>
+        <p class="font-display text-3xl font-bold">{site.hero.stat.value}</p>
+        <p class="text-sm text-ink/60">{site.hero.stat.label}</p>
+      </Card>
+
+      <!-- Mini card: servicio destacado -->
+      <Card tone="peach" class="group">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/70">
+          <Icon name="palette" size={20} />
+        </span>
+        <h2 class="mt-3 font-display text-lg font-bold leading-tight">Diseño UI/UX a medida</h2>
+        <p class="mt-1 text-sm text-ink/60">Interfaces que convierten.</p>
+        <a href="#servicios" class="mt-3 inline-flex items-center gap-1 font-display text-sm font-bold text-lavanda-deep group-hover:gap-2 transition-all">
+          Ver servicios <Icon name="arrow-right" size={14} />
+        </a>
+      </Card>
+
+      <!-- Mini card: desarrollo -->
+      <Card tone="cielo" class="group">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/70">
+          <Icon name="code" size={20} />
+        </span>
+        <h2 class="mt-3 font-display text-lg font-bold leading-tight">Código que rinde</h2>
+        <p class="mt-1 text-sm text-ink/60">Velocidad y SEO reales.</p>
+        <a href="#proyectos" class="mt-3 inline-flex items-center gap-1 font-display text-sm font-bold text-lavanda-deep group-hover:gap-2 transition-all">
+          Ver proyectos <Icon name="arrow-right" size={14} />
+        </a>
+      </Card>
+
+      <!-- Mini card: e-commerce -->
+      <Card tone="mint" class="group">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/70">
+          <Icon name="cart" size={20} />
+        </span>
+        <h2 class="mt-3 font-display text-lg font-bold leading-tight">E-commerce</h2>
+        <p class="mt-1 text-sm text-ink/60">Tiendas que venden.</p>
+        <a href="#precios" class="mt-3 inline-flex items-center gap-1 font-display text-sm font-bold text-lavanda-deep group-hover:gap-2 transition-all">
+          Ver precios <Icon name="arrow-right" size={14} />
+        </a>
+      </Card>
+
+      <!-- CTA ancho (2x1) -->
+      <Card tone="ink" padded={false} class="sm:col-span-2 flex items-center justify-between gap-6 p-6 lg:col-span-4 lg:px-10">
+        <div>
+          <h2 class="font-display text-xl font-bold text-cream sm:text-2xl">¿Tienes un proyecto en mente?</h2>
+          <p class="mt-1 text-sm text-cream/70">Respuesta en menos de 24 horas, con plan y presupuesto claros.</p>
+        </div>
+        <Button href={`mailto:${site.email}?subject=Proyecto%20nuevo`} variant="secondary" class="shrink-0">
+          Hablemos
+          <Icon name="arrow-right" size={16} />
+        </Button>
+      </Card>
+    </div>
+  </div>
+</section>

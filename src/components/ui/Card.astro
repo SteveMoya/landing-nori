@@ -1,0 +1,33 @@
+---
+import type { Pastel } from '../../data/site';
+
+interface Props {
+  class?: string;
+  padded?: boolean;
+  tone?: Pastel | 'white' | 'ink';
+  as?: 'article' | 'div' | 'li';
+}
+
+const { padded = true, tone = 'white', as: Tag = 'div', class: className }: Props = Astro.props;
+
+const tones: Record<string, string> = {
+  white: 'bg-white',
+  lavanda: 'bg-lavanda',
+  mint: 'bg-mint',
+  peach: 'bg-peach',
+  butter: 'bg-butter',
+  cielo: 'bg-cielo',
+  ink: 'bg-ink text-cream',
+};
+---
+
+<Tag
+  class:list={[
+    'relative rounded-3xl border border-ink/5 shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-pastel',
+    tones[tone],
+    padded && 'p-7',
+    className,
+  ]}
+>
+  <slot />
+</Tag>

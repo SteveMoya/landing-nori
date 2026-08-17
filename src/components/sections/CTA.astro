@@ -1,0 +1,35 @@
+---
+import { site } from '../../data/site';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<Section>
+  <div class="relative overflow-hidden rounded-[2.5rem] bg-ink px-6 py-20 text-center sm:px-16">
+    <!-- blobs pastel -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+      <div class="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-lavanda/30 blur-3xl"></div>
+      <div class="absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-mint/30 blur-3xl"></div>
+      <div class="absolute right-1/4 top-8 h-24 w-24 rounded-full bg-peach/25 blur-2xl"></div>
+    </div>
+
+    <div class="relative">
+      <h2 class="mx-auto max-w-2xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-cream sm:text-5xl md:text-6xl">
+        Hablemos de tu <span class="text-lavanda">próximo proyecto</span>
+      </h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-cream/70">
+        Cuéntanos qué necesitas y te respondemos en menos de 24 horas con un plan claro y un presupuesto honesto.
+      </p>
+      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <Button href={`mailto:${site.email}?subject=Proyecto%20nuevo`} size="lg" class="bg-lavanda text-ink hover:bg-lavanda/90">
+          {site.hero.primaryCta}
+          <Icon name="arrow-right" size={18} />
+        </Button>
+        <Button href="#precios" variant="secondary" size="lg" class="!bg-transparent !text-cream ring-cream/25 hover:ring-cream/50">
+          Ver precios
+        </Button>
+      </div>
+    </div>
+  </div>
+</Section>

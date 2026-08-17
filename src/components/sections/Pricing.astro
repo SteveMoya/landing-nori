@@ -1,0 +1,61 @@
+---
+import { pricing } from '../../data/pricing';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<Section id="precios" ariaLabelledBy="pricing-title" background="lavanda">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 font-display text-sm font-bold uppercase tracking-widest text-lavanda-deep">Precios</p>
+    <h2
+      id="pricing-title"
+      class="font-display text-4xl font-bold tracking-tight sm:text-5xl"
+    >
+      Planes claros, <span class="text-lavanda-deep">precios honestos</span>
+    </h2>
+    <p class="mt-4 text-lg text-ink/70">Cada proyecto se cotiza a medida, pero así se ve el punto de partida.</p>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-3">
+    {
+      pricing.map((tier, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`}>
+          <Card
+            tone={tier.featured ? 'butter' : 'white'}
+            class:list={['flex h-full flex-col', tier.featured && 'lg:-translate-y-3']}
+          >
+          {tier.featured && (
+            <Badge tone="ink" class="absolute -top-3 left-6">Más elegido</Badge>
+          )}
+          <h3 class="font-display text-xl font-bold tracking-tight">{tier.name}</h3>
+          <p class="mt-1 text-sm text-ink/60">{tier.description}</p>
+          <p class="mt-5">
+            <span class="font-display text-4xl font-bold tracking-tight">{tier.price}</span>
+            <span class="ml-1 text-sm text-ink/50">· {tier.period}</span>
+          </p>
+          <ul class="mt-6 flex-1 space-y-3">
+            {
+              tier.features.map((feature) => (
+                <li class="flex items-start gap-3 text-sm">
+                  <Icon name="check" size={16} class="mt-0.5 shrink-0 text-lavanda-deep" />
+                  {feature}
+                </li>
+              ))
+            }
+          </ul>
+          <Button
+            href={`mailto:${'hola@nori.studio'}?subject=${encodeURIComponent(`Presupuesto plan ${tier.name}`)}`}
+            variant={tier.featured ? 'primary' : 'secondary'}
+            class="mt-8 w-full"
+          >
+            {tier.cta}
+          </Button>
+          </Card>
+        </li>
+      ))
+    }
+  </div>
+</Section>

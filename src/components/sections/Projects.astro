@@ -1,0 +1,72 @@
+---
+import { projects } from '../../data/projects';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+
+const toneBgs: Record<string, string> = {
+  lavanda: 'bg-lavanda',
+  mint: 'bg-mint',
+  peach: 'bg-peach',
+  butter: 'bg-butter',
+  cielo: 'bg-cielo',
+};
+---
+
+<Section id="proyectos" ariaLabelledBy="projects-title" background="white">
+  <div class="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+    <div>
+      <p class="mb-3 font-display text-sm font-bold uppercase tracking-widest text-lavanda-deep">Proyectos</p>
+      <h2
+        id="projects-title"
+        class="font-display text-4xl font-bold tracking-tight sm:text-5xl"
+      >
+        Trabajos que hablan <span class="text-lavanda-deep">por sí solos</span>
+      </h2>
+    </div>
+    <p class="max-w-sm text-ink/60">
+      Una muestra de proyectos recientes. Cada uno con su historia, su reto y su resultado.
+    </p>
+  </div>
+
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      projects.map((project, index) => (
+        <li
+          data-reveal
+          style={`--reveal-delay:${(index % 3) * 80}ms`}
+          class:list={[index === 0 && 'sm:col-span-2 lg:col-span-1']}
+        >
+          <a href={project.url} class="group block h-full focus-visible:outline-none" aria-label={`${project.name} — ${project.description}`}>
+            <Card tone="white" class="h-full overflow-hidden !p-0">
+              <!-- Mockup de navegador (CSS, sin imágenes) -->
+              <div class="flex items-center gap-2 border-b border-ink/5 bg-cream px-4 py-2.5">
+                <span class="h-2.5 w-2.5 rounded-full bg-peach" aria-hidden="true"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-butter" aria-hidden="true"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-mint" aria-hidden="true"></span>
+                <span class="ml-2 flex-1 truncate rounded-full bg-white px-3 py-1 text-[11px] text-ink/50 ring-1 ring-ink/5">
+                  {project.name.toLowerCase().replace(/ /g, '')}.com
+                </span>
+              </div>
+              <div class:list={['m-4 flex h-36 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-[1.02]', toneBgs[project.tone]]}>
+                <span class="font-display text-2xl font-bold tracking-tight text-ink/80">{project.name}</span>
+              </div>
+              <div class="px-6 pb-6 pt-2">
+                <div class="flex items-center justify-between gap-3">
+                  <h3 class="font-display text-lg font-bold tracking-tight">{project.name}</h3>
+                  <Icon name="arrow-right" size={16} class="shrink-0 text-lavanda-deep transition-transform duration-200 group-hover:translate-x-1" />
+                </div>
+                <p class="mt-1 text-sm text-ink/60">{project.description}</p>
+                <ul class="mt-3 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <li class="rounded-full bg-cream px-2.5 py-1 text-[11px] font-semibold text-ink/60 ring-1 ring-ink/5">{tag}</li>
+                  ))}
+                </ul>
+              </div>
+            </Card>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

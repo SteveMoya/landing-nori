@@ -1,0 +1,20 @@
+---
+interface Props {
+  href: string;
+  class?: string;
+  external?: boolean;
+}
+
+const { href, external = false, class: className } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    'font-semibold text-lavanda-deep underline-offset-4 transition-colors hover:text-ink hover:underline',
+    className,
+  ]}
+  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+>
+  <slot />
+</a>

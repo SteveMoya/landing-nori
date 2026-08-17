@@ -1,0 +1,71 @@
+---
+import { site } from '../../data/site';
+import Icon from '../ui/Icon.astro';
+---
+
+<!-- Compartido: el scope x-data vive en <header> (Header.astro) -->
+<div
+  data-menu
+  id="mobile-menu"
+  class="fixed inset-0 z-40 lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+  x-show="open"
+  x-cloak
+  x-transition.opacity.duration.200ms
+  @keydown.escape.window="open = false; document.body.classList.remove('overflow-hidden')"
+>
+  <div class="absolute inset-0 bg-cream/97 backdrop-blur-xl"></div>
+
+  <nav class="container-nori relative flex h-full flex-col justify-center gap-2" aria-label="Menú móvil">
+    {
+      site.nav.map((item) => (
+        <a
+          href={item.href}
+          @click="open = false; document.body.classList.remove('overflow-hidden')"
+          class="py-2 font-display text-4xl font-bold tracking-tight text-ink transition-colors duration-200 hover:text-lavanda-deep"
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <a
+      href={`mailto:${site.email}`}
+      @click="open = false; document.body.classList.remove('overflow-hidden')"
+      class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-ink px-6 py-4 font-display text-base font-semibold text-cream shadow-soft"
+    >
+      {site.hero.primaryCta}
+    </a>
+    <div class="mt-10 flex gap-4">
+      {
+        site.socials.map((s) => (
+          <a
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.name}
+            class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white text-ink ring-1 ring-ink/10 transition-all duration-200 hover:-translate-y-0.5 hover:text-lavanda-deep"
+          >
+            <Icon name={s.icon} size={18} />
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+
+  <button
+    type="button"
+    class="absolute right-5 top-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink ring-1 ring-ink/10"
+    aria-label="Cerrar menú"
+    @click="open = false; document.body.classList.remove('overflow-hidden')"
+  >
+    <Icon name="close" size={22} />
+  </button>
+</div>
+
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+</style>
