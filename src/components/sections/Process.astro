@@ -11,7 +11,21 @@ const toneBgs: Record<string, string> = {
 };
 ---
 
-<Section id="proceso" ariaLabelledBy="process-title">
+<Section id="proceso" ariaLabelledBy="process-title" class="relative overflow-hidden">
+  <!-- Video decorativo de fondo con overlay pastel lavanda/mint -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      class="h-full w-full object-cover"
+    >
+      <source src="/bg-creative.mp4" type="video/mp4" />
+    </video>
+    <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-r from-lavanda/85 via-mint/70 to-cream/90"></div>
+  </div>
   <div class="mb-14 max-w-2xl">
     <p class="mb-3 font-display text-sm font-bold uppercase tracking-widest text-lavanda-deep">Proceso</p>
     <h2
