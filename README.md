@@ -4,6 +4,9 @@
 
 Landing page estática construida con **Astro 7 + Tailwind CSS v4 + TypeScript + Alpine.js**, preparada para **Cloudflare Pages**. Serie de 9 landing pages por estilo de diseño (este proyecto: **Bento Box**).
 
+
+![Vista previa — 🍙 Nori Landing](docs/preview.png)
+
 ---
 
 ## 🚀 Demo en producción
