@@ -15,22 +15,33 @@ import Icon from '../ui/Icon.astro';
     <!-- Bento grid hero: asimétrico, con links a productos -->
     <div class="grid auto-rows-[minmax(110px,auto)] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
       <!-- Card principal (2x2) -->
-      <Card tone="lavanda" padded={false} class="sm:col-span-2 lg:row-span-2 flex flex-col justify-between p-8 lg:p-10">
-        <div>
-          <Badge tone="ink" class="mb-5">{site.hero.badge}</Badge>
-          <h1 class="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            {site.hero.title.start} <span class="text-lavanda-deep">{site.hero.title.accent}</span>
-          </h1>
-          <p class="mt-5 max-w-md text-lg leading-relaxed text-ink/70">{site.hero.subtitle}</p>
+      <Card tone="lavanda" padded={false} class="sm:col-span-2 lg:row-span-2 flex flex-col justify-between overflow-hidden lg:flex-row">
+        <div class="flex flex-col justify-between p-8 lg:flex-1 lg:p-10">
+          <div>
+            <Badge tone="ink" class="mb-5">{site.hero.badge}</Badge>
+            <h1 class="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+              {site.hero.title.start} <span class="text-lavanda-deep">{site.hero.title.accent}</span>
+            </h1>
+            <p class="mt-5 max-w-md text-lg leading-relaxed text-ink/70">{site.hero.subtitle}</p>
+          </div>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <Button href={`mailto:${site.email}?subject=Proyecto%20nuevo`} size="lg">
+              {site.hero.primaryCta}
+              <Icon name="arrow-right" size={18} />
+            </Button>
+            <Button href="#proyectos" variant="secondary" size="lg">
+              {site.hero.secondaryCta}
+            </Button>
+          </div>
         </div>
-        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
-          <Button href={`mailto:${site.email}?subject=Proyecto%20nuevo`} size="lg">
-            {site.hero.primaryCta}
-            <Icon name="arrow-right" size={18} />
-          </Button>
-          <Button href="#proyectos" variant="secondary" size="lg">
-            {site.hero.secondaryCta}
-          </Button>
+        <!-- Foto real: escritorio creativo / acuarela -->
+        <div class="relative h-52 w-full overflow-hidden lg:h-auto lg:w-1/2">
+          <img
+            src="/hero-workspace.jpg"
+            alt="Escritorio creativo con acuarelas y pinceles"
+            class="h-full w-full object-cover"
+          />
+          <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-lavanda/40 via-transparent to-transparent"></div>
         </div>
       </Card>
 
